@@ -16,22 +16,22 @@ It offers a health check REST API and shows containerization, Kubernetes managem
 
 ## Project Structure
 technical-test/
-├─ docker/
-│  └─ Dockerfile
+|─ docker/
+│  ─ Dockerfile
 ├─ integration/
-│  └─ technical-test_4.0.car
+│  ─ technical-test_4.0.car
 ├─ k8s/
-│  ├─ deployment.yaml
-│  ├─ service.yaml
-│  ├─ ingress.yaml
-│  ├─ hpa.yaml
-│  └─ secret.yaml
+│  ─ deployment.yaml
+│  ─ service.yaml
+│  ─ ingress.yaml
+│  ─ hpa.yaml
+│  ─ secret.yaml
 ├─ helm/
-│  └─ technical-test/
-│     ├─ Chart.yaml
-│     ├─ values.yaml
-│     └─ templates/
+│  ─ technical-test/
+│    | ─ Chart.yaml
+│    | ─ values.yaml
+│    | ─ templates/
 ├─ docs/
-│  ├─ README.md
-│  └─ answers.md
+│  ─ README.md
+│  ─ answers.md
 └─ .gitignore
