@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: technical-test-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: technical-test.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: technical-test
+                port:
+                  number: 80

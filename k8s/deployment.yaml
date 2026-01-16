@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: technical-test
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: technical-test
+  template:
+    metadata:
+      labels:
+        app: technical-test
+    spec:
+      containers:
+        - name: micro-integrator
+          image: technical-test:4.0
+          ports:
+            - containerPort: 8290
+            - containerPort: 8253
+          volumeMounts:
+            - name: car-volume
+              mountPath: /home/wso2carbon/wso2mi-4.0.0/repository/deployment/server/carbonapps
+      volumes:
+        - name: car-volume
+          configMap:
+            name: technical-test-car

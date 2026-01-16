@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: technical-test
+  labels:
+    app: technical-test
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: technical-test
+  template:
+    metadata:
+      labels:
+        app: technical-test
+    spec:
+      containers:
+        - name: micro-integrator
+          image: "{{ .Values.image.repository }}@{{ .Values.image.digest }}"
+          imagePullPolicy: "{{ .Values.image.pullPolicy }}"
+          ports:
+            - name: http-mi
+              containerPort: 8290
+            - name: https-mi
+              containerPort: 8253
+
+          {{- if .Values.resources }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          {{- end }}
+
+          volumeMounts:
+            - name: car-volume
+              mountPath: /home/wso2carbon/wso2mi-4.0.0/repository/deployment/server/carbonapps
+              readOnly: true
+
+      volumes:
+        - name: car-volume
+          secret:
+            secretName: technical-test-car
+            items:
+              - key: technical-test_4.0.car
+                path: technical-test_4.0.car
